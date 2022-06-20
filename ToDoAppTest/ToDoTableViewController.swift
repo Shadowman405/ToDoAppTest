@@ -29,4 +29,12 @@ extension ToDoTableViewController {
         cell.textLabel?.text = item[indexPath.row]
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print(item[indexPath.row])
+        let cell = tableView.cellForRow(at: indexPath)
+        cell?.accessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 }
