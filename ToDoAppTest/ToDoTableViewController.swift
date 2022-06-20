@@ -22,8 +22,19 @@ class ToDoTableViewController: UITableViewController {
         
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             //somthng happens
-            self.item.append(textField.text!) // fix and unwrap text
-            self.tableView.reloadData()
+            if let safeText = textField.text{
+                if safeText != "" {
+                    self.item.append(safeText)
+                    self.tableView.reloadData()
+                } else {
+                    let alertTF = UIAlertController(title: "Empty string !!!", message: "Type something in textfield", preferredStyle: .alert)
+                    self.present(alertTF, animated: true)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.7) {
+                        alertTF.dismiss(animated: true)
+                    }
+                }
+            }
         }
         
         alert.addTextField { alertTF in
