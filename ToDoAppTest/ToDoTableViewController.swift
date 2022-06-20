@@ -9,10 +9,30 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
     
-    let item = ["Kiss Bebra", "Touch Uncle Bogdan", "Watch JoJo", "Make Gachi Remix For Some Song"]
+    var item = ["Kiss Bebra", "Touch Uncle Bogdan", "Watch JoJo", "Make Gachi Remix For Some Song"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+        
+        let alert = UIAlertController(title: "Lets Add Some Events", message: "", preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Add Item", style: .default) { action in
+            //somthng happens
+            self.item.append(textField.text!) // fix and unwrap text
+            self.tableView.reloadData()
+        }
+        
+        alert.addTextField { alertTF in
+            alertTF.placeholder = " Type something "
+            textField = alertTF
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true)
     }
 
 }
