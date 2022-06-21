@@ -9,7 +9,8 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
     
-    let defaults = UserDefaults.standard
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
+    
     var item = [Item]()
 
     override func viewDidLoad() {
@@ -26,7 +27,8 @@ class ToDoTableViewController: UITableViewController {
         let newItem3 = Item()
         newItem3.title = "Find Pipa"
         item.append(newItem3)
-//        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+        
+//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
 //            item = items
 //        }
     }
@@ -45,8 +47,8 @@ class ToDoTableViewController: UITableViewController {
                     newItem.title = safeText
                     
                     self.item.append(newItem)
-                    self.defaults.set(self.item, forKey: "TodoListArray")
-                    self.tableView.reloadData()
+                    self.saveItems()
+                    
                 } else {
                     let alertTF = UIAlertController(title: "Empty string !!!", message: "Type something in textfield", preferredStyle: .alert)
                     self.present(alertTF, animated: true)
@@ -88,8 +90,20 @@ extension ToDoTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         item[indexPath.row].done = !item[indexPath.row].done
+        saveItems()
         
-        tableView.reloadData()
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func saveItems() {
+        let encoder = PropertyListEncoder()
+        do {
+            let data = try encoder.encode(item)
+            try data.write(to: dataFilePath!)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        self.tableView.reloadData()
     }
 }
