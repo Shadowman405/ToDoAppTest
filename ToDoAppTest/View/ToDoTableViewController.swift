@@ -78,13 +78,10 @@ extension ToDoTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let rowItem = item[indexPath.row]
         cell.textLabel?.text = item[indexPath.row].title
         
-        if item[indexPath.row].done == true {
-            cell.accessoryType = .checkmark
-        } else {
-            cell.accessoryType = .none
-        }
+        cell.accessoryType = rowItem.done == true ? .checkmark : .none
         
         return cell
     }
@@ -93,7 +90,6 @@ extension ToDoTableViewController {
         item[indexPath.row].done = !item[indexPath.row].done
         
         tableView.reloadData()
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
