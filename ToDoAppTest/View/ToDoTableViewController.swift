@@ -10,13 +10,25 @@ import UIKit
 class ToDoTableViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
-    var item = ["Kiss Bebra", "Touch Uncle Bogdan", "Watch JoJo", "Make Gachi Remix For Some Song"]
+    var item = [Item]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
-            item = items
-        }
+        
+        let newItem = Item()
+        newItem.title = "Find Bebra"
+        item.append(newItem)
+        
+        let newItem2 = Item()
+        newItem2.title = "Find Bogdan"
+        item.append(newItem2)
+        
+        let newItem3 = Item()
+        newItem3.title = "Find Pipa"
+        item.append(newItem3)
+//        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+//            item = items
+//        }
     }
     
     
@@ -29,7 +41,10 @@ class ToDoTableViewController: UITableViewController {
             //somthng happens
             if let safeText = textField.text{
                 if safeText != "" {
-                    self.item.append(safeText)
+                    let newItem = Item()
+                    newItem.title = safeText
+                    
+                    self.item.append(newItem)
                     self.defaults.set(self.item, forKey: "TodoListArray")
                     self.tableView.reloadData()
                 } else {
@@ -63,14 +78,21 @@ extension ToDoTableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
-        cell.textLabel?.text = item[indexPath.row]
+        cell.textLabel?.text = item[indexPath.row].title
+        
+        if item[indexPath.row].done == true {
+            cell.accessoryType = .checkmark
+        } else {
+            cell.accessoryType = .none
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print(item[indexPath.row])
-        let cell = tableView.cellForRow(at: indexPath)
-        cell?.accessoryType = cell?.accessoryType == .checkmark ? .none : .checkmark
+        item[indexPath.row].done = !item[indexPath.row].done
+        
+        tableView.reloadData()
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
