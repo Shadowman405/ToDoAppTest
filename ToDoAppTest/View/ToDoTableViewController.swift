@@ -10,27 +10,12 @@ import UIKit
 class ToDoTableViewController: UITableViewController {
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
-    
     var item = [Item]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let newItem = Item()
-        newItem.title = "Find Bebra"
-        item.append(newItem)
-        
-        let newItem2 = Item()
-        newItem2.title = "Find Bogdan"
-        item.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "Find Pipa"
-        item.append(newItem3)
-        
-//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-//            item = items
-//        }
+        loadItems()
     }
     
     
@@ -95,6 +80,8 @@ extension ToDoTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // NSCoder func save and load
+    
     func saveItems() {
         let encoder = PropertyListEncoder()
         do {
@@ -105,5 +92,16 @@ extension ToDoTableViewController {
         }
         
         self.tableView.reloadData()
+    }
+    
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                item = try decoder.decode([Item].self, from: data)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
     }
 }
