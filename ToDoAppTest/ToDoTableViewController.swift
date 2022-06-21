@@ -9,11 +9,16 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
     
+    let defaults = UserDefaults.standard
     var item = ["Kiss Bebra", "Touch Uncle Bogdan", "Watch JoJo", "Make Gachi Remix For Some Song"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let items = defaults.array(forKey: "TodoListArray") as? [String] {
+            item = items
+        }
     }
+    
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         var textField = UITextField()
@@ -25,6 +30,7 @@ class ToDoTableViewController: UITableViewController {
             if let safeText = textField.text{
                 if safeText != "" {
                     self.item.append(safeText)
+                    self.defaults.set(self.item, forKey: "TodoListArray")
                     self.tableView.reloadData()
                 } else {
                     let alertTF = UIAlertController(title: "Empty string !!!", message: "Type something in textfield", preferredStyle: .alert)
