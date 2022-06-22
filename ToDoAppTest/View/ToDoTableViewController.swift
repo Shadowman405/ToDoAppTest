@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import CoreData
 
 class ToDoTableViewController: UITableViewController {
     
     let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("Items.plist")
     var item = [Item]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadItems()
+        //loadItems()
     }
     
     
@@ -25,11 +27,14 @@ class ToDoTableViewController: UITableViewController {
         let alert = UIAlertController(title: "Lets Add Some Events", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
-            //somthng happens
             if let safeText = textField.text{
                 if safeText != "" {
-                    let newItem = Item()
+                    //CoreData context ref from AppDelegate -> using singletone make AppDelegate as object to get his objcts
+//                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+                    let newItem = Item(context: self.context)
+                    
                     newItem.title = safeText
+                    newItem.done = false
                     
                     self.item.append(newItem)
                     self.saveItems()
@@ -83,10 +88,8 @@ extension ToDoTableViewController {
     // NSCoder func save and load
     
     func saveItems() {
-        let encoder = PropertyListEncoder()
         do {
-            let data = try encoder.encode(item)
-            try data.write(to: dataFilePath!)
+            try context.save()
         } catch {
             print(error.localizedDescription)
         }
@@ -94,14 +97,14 @@ extension ToDoTableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems() {
-        if let data = try? Data(contentsOf: dataFilePath!) {
-            let decoder = PropertyListDecoder()
-            do {
-                item = try decoder.decode([Item].self, from: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-    }
+//    func loadItems() {
+//        if let data = try? Data(contentsOf: dataFilePath!) {
+//            let decoder = PropertyListDecoder()
+//            do {
+//                item = try decoder.decode([Item].self, from: data)
+//            } catch {
+//                print(error.localizedDescription)
+//            }
+//        }
+//    }
 }
