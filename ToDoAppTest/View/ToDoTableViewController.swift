@@ -17,7 +17,6 @@ class ToDoTableViewController: UITableViewController {
         super.viewDidLoad()
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
         loadItems()
     }
     
@@ -62,7 +61,7 @@ class ToDoTableViewController: UITableViewController {
 
 // MARK: - Table view data source
 
-extension ToDoTableViewController {
+extension ToDoTableViewController: UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return item.count
     }
@@ -84,7 +83,19 @@ extension ToDoTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    // NSCoder func save and load
+    // MARK: - SearchBar methods
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "title CONTAINS[cd] %@", searchBar.text!)
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        
+        loadItems(with: request)
+        
+    }
+    
+    //MARK: -  Core Data func save and load
     
     func saveItems() {
         do {
@@ -96,12 +107,13 @@ extension ToDoTableViewController {
         self.tableView.reloadData()
     }
     
-    func loadItems() {
-        let request : NSFetchRequest<Item> = Item.fetchRequest()
+    func loadItems(with requset: NSFetchRequest<Item> = Item.fetchRequest()) {
         do {
-            item = try context.fetch(request)
+            item = try context.fetch(requset)
         } catch {
             print(error.localizedDescription)
         }
+        
+        tableView.reloadData()
     }
 }
