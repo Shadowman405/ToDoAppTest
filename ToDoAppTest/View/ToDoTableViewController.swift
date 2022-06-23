@@ -95,6 +95,12 @@ extension ToDoTableViewController: UISearchBarDelegate {
         
     }
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+        }
+    }
+    
     //MARK: -  Core Data func save and load
     
     func saveItems() {
