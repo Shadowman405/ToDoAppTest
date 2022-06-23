@@ -18,7 +18,7 @@ class ToDoTableViewController: UITableViewController {
         
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
-        //loadItems()
+        loadItems()
     }
     
     
@@ -30,8 +30,6 @@ class ToDoTableViewController: UITableViewController {
         let action = UIAlertAction(title: "Add Item", style: .default) { action in
             if let safeText = textField.text{
                 if safeText != "" {
-                    //CoreData context ref from AppDelegate -> using singletone make AppDelegate as object to get his objcts
-//                    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
                     let newItem = Item(context: self.context)
                     
                     newItem.title = safeText
@@ -98,14 +96,12 @@ extension ToDoTableViewController {
         self.tableView.reloadData()
     }
     
-//    func loadItems() {
-//        if let data = try? Data(contentsOf: dataFilePath!) {
-//            let decoder = PropertyListDecoder()
-//            do {
-//                item = try decoder.decode([Item].self, from: data)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
+    func loadItems() {
+        let request : NSFetchRequest<Item> = Item.fetchRequest()
+        do {
+            item = try context.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
 }
