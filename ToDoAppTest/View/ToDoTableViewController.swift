@@ -37,7 +37,7 @@ class ToDoTableViewController: UITableViewController {
                     
                     newItem.title = safeText
                     newItem.done = false
-                    
+                    newItem.parentCategory = self.selectedCategory
                     self.item.append(newItem)
                     self.saveItems()
                     
