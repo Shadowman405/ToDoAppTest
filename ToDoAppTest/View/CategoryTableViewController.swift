@@ -22,7 +22,7 @@ class CategoryTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
-        //cell.textLabel?.text = categories[indexPath.row]
+        cell.textLabel?.text = categories[indexPath.row].name
         return cell
     }
 
@@ -30,9 +30,32 @@ class CategoryTableViewController: UITableViewController {
         categories.count
     }
     
-// MARK: - IBActions
+// MARK: - IBActions and func
     
     @IBAction func addButtonCLicked(_ sender: UIBarButtonItem) {
+        var textField = UITextField()
+
+        let alert = UIAlertController(title: "Add new category", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add", style: .default) { action in
+            let newCategory = Category(context: self.context)
+            newCategory.name = textField.text!
+            
+            self.categories.append(newCategory)
+            self.saveCategories()
+        }
+        
+        alert.addTextField { alertTF in
+            alertTF.placeholder = " Type something "
+            textField = alertTF
+        }
+        
+        alert.addAction(action)
+        present(alert, animated: true)
+        
+    }
+    
+    func saveCategories() {
+        
     }
     
 }
