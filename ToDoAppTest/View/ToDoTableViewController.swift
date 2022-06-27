@@ -11,13 +11,17 @@ import CoreData
 class ToDoTableViewController: UITableViewController {
     
     var item = [Item]()
+    var selectedCategory: Category? {
+        didSet {
+            loadItems()
+        }
+    }
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        loadItems()
+        //loadItems()
     }
     
     

@@ -32,6 +32,18 @@ class CategoryTableViewController: UITableViewController {
         categories.count
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Items", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destanationVC = segue.destination as! ToDoTableViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destanationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
+    
 // MARK: - IBActions and func
     
     @IBAction func addButtonCLicked(_ sender: UIBarButtonItem) {
