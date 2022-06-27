@@ -67,7 +67,14 @@ class CategoryTableViewController: UITableViewController {
     }
     
     func loadCategories() {
+        let request : NSFetchRequest<Category> = Category.fetchRequest()
+        do {
+           categories = try context.fetch(request)
+        } catch {
+            print(error.localizedDescription)
+        }
         
+        tableView.reloadData()
     }
     
 }
