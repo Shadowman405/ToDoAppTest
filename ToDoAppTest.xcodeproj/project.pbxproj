@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BF169A6A28639A66002EF7B4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BF169A6828639A66002EF7B4 /* DataModel.xcdatamodeld */; };
+		BF169A6C286A2EAE002EF7B4 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF169A6B286A2EAE002EF7B4 /* CategoryTableViewController.swift */; };
 		BF6E7C1E285A70EC00C5911F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E7C1D285A70EC00C5911F /* AppDelegate.swift */; };
 		BF6E7C20285A70EC00C5911F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF6E7C1F285A70EC00C5911F /* SceneDelegate.swift */; };
 		BF6E7C25285A70EC00C5911F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BF6E7C23285A70EC00C5911F /* Main.storyboard */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		BF169A6928639A66002EF7B4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
+		BF169A6B286A2EAE002EF7B4 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
 		BF6E7C1A285A70EC00C5911F /* ToDoAppTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoAppTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF6E7C1D285A70EC00C5911F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BF6E7C1F285A70EC00C5911F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				BF6E7C34285A75D400C5911F /* ToDoTableViewController.swift */,
+				BF169A6B286A2EAE002EF7B4 /* CategoryTableViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -165,6 +168,7 @@
 				BF169A6A28639A66002EF7B4 /* DataModel.xcdatamodeld in Sources */,
 				BF6E7C28285A70EC00C5911F /* ToDoAppTest.xcdatamodeld in Sources */,
 				BF6E7C35285A75D400C5911F /* ToDoTableViewController.swift in Sources */,
+				BF169A6C286A2EAE002EF7B4 /* CategoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

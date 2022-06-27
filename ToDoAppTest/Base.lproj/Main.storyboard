@@ -8,6 +8,44 @@
     </dependencies>
     <scenes>
         <!--Todoye-->
+        <scene sceneID="iPg-GV-Yuo">
+            <objects>
+                <tableViewController id="IJg-FT-JC2" customClass="CategoryTableViewController" customModule="ToDoAppTest" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="JDg-lW-71J">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" id="Uj9-Pt-kXy">
+                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Uj9-Pt-kXy" id="YvS-fk-Wj8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="IJg-FT-JC2" id="DJH-vi-oD4"/>
+                            <outlet property="delegate" destination="IJg-FT-JC2" id="VBS-74-mFe"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Todoye" id="0zv-dS-8uT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="ryt-5d-t7v">
+                            <connections>
+                                <action selector="addButtonCLicked:" destination="IJg-FT-JC2" id="GA4-xa-KYo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="zxQ-9P-Y1T" kind="show" identifier="Items" id="KMR-kM-j8r"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96T-9h-joQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2368" y="92"/>
+        </scene>
+        <!--Items-->
         <scene sceneID="EAd-i2-hGe">
             <objects>
                 <tableViewController id="zxQ-9P-Y1T" customClass="ToDoTableViewController" customModule="ToDoAppTest" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,7 +76,7 @@
                             <outlet property="delegate" destination="zxQ-9P-Y1T" id="3S6-hB-VdE"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoye" id="Kul-aC-DYU">
+                    <navigationItem key="navigationItem" title="Items" id="Kul-aC-DYU">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="RfS-DJ-7JC">
                             <connections>
                                 <action selector="addButtonPressed:" destination="zxQ-9P-Y1T" id="5zn-Uj-faL"/>
@@ -48,7 +86,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W7D-h9-6Jf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2489.8550724637685" y="91.741071428571431"/>
+            <point key="canvasLocation" x="3245" y="92"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Osy-NK-MeI">
@@ -62,7 +100,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="zxQ-9P-Y1T" kind="relationship" relationship="rootViewController" id="oYf-QY-wvY"/>
+                        <segue destination="IJg-FT-JC2" kind="relationship" relationship="rootViewController" id="ybs-FO-EjM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Akd-ke-DXf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
