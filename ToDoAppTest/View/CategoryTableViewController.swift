@@ -15,6 +15,8 @@ class CategoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadCategories()
     }
     
 
@@ -55,6 +57,16 @@ class CategoryTableViewController: UITableViewController {
     }
     
     func saveCategories() {
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        tableView.reloadData()
+    }
+    
+    func loadCategories() {
         
     }
     
